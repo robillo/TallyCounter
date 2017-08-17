@@ -55,7 +55,7 @@ public class MyTallyCounter extends View implements TallyCounter{
         mBackgroundRect = new RectF();
 
         // Initialize drawing measurements.
-        mCornerRadius = Math.round(2f * getResources().getDisplayMetrics().density);
+        mCornerRadius = Math.round(1f * getResources().getDisplayMetrics().density);
 
         // Do initial count setup.
         setCount(0);
@@ -91,7 +91,10 @@ public class MyTallyCounter extends View implements TallyCounter{
 
     @Override
     public void reset() {
-        setCount(0);
+        if(getCount()!=0){
+            setCount(0);
+            invalidate();
+        }
     }
 
     @Override
@@ -110,6 +113,7 @@ public class MyTallyCounter extends View implements TallyCounter{
         this.count = count;
         // Create the string here.
         this.displayedCount = String.format(Locale.getDefault(), "%04d", count);
+        invalidate();
     }
 
     //UNUSED FOR THIS PROJECT
