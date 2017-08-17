@@ -101,10 +101,13 @@ public class MyTallyCounter extends View implements TallyCounter{
         canvas.drawRoundRect(mBackgroundRect, mCornerRadius, mCornerRadius, mBackgroundPaint);
 
         // Draw baseline.
-        final float baselineY = Math.round(canvasHeight * 0.6f);
-        canvas.drawLine(0, baselineY, canvasWidth, baselineY, mLinePaint);
-
-        // Draw text.
+        // Draw lines that show font top and bottom.
+        final float baselineY = Math.round(canvasHeight * 0.65f);
+        final Paint.FontMetrics fontMetrics = mNumberPaint.getFontMetrics();
+        final float topY = Math.round(baselineY + fontMetrics.top);
+        final float bottomY = Math.round(baselineY + fontMetrics.bottom);
+        canvas.drawLine(0, topY, canvasWidth, topY, mLinePaint);
+        canvas.drawLine(0, bottomY, canvasWidth, bottomY, mLinePaint);
 
         // Measure the width of text to display.
         final float textWidth = mNumberPaint.measureText(displayedCount);
