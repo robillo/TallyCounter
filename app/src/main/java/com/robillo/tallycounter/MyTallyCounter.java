@@ -98,7 +98,8 @@ public class MyTallyCounter extends View implements TallyCounter{
 
         // Draw the background.
         mBackgroundRect.set(0f, 0f, canvasWidth, canvasHeight);
-        canvas.drawRoundRect(mBackgroundRect, mCornerRadius, mCornerRadius, mBackgroundPaint);
+//        canvas.drawRoundRect(mBackgroundRect, mCornerRadius, mCornerRadius, mBackgroundPaint);
+        canvas.drawOval(mBackgroundRect, mBackgroundPaint);
 
         // Draw baseline.
         // Draw lines that show font top and bottom.
