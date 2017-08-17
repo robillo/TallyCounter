@@ -15,11 +15,17 @@ public class MainActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        counter = (MyTallyCounter) findViewById(R.id.my_tally_counter);
+        counter = findViewById(R.id.my_tally_counter);
         (findViewById(R.id.increment)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 counter.increment();
+            }
+        });
+        (findViewById(R.id.reset)).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                counter.reset();
             }
         });
     }

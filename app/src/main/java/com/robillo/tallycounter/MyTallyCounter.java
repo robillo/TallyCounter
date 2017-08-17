@@ -21,6 +21,7 @@ import java.util.Locale;
 public class MyTallyCounter extends View implements TallyCounter{
 
     private static final int MAX_COUNT = 9999;
+    private static final String MAX_COUNT_STRING = String.valueOf(MAX_COUNT);
 
     // State variables
     private int count;
@@ -63,7 +64,26 @@ public class MyTallyCounter extends View implements TallyCounter{
 
     @Override
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+        final Paint.FontMetrics fontMetrics = mNumberPaint.getFontMetrics();
+
+        // Measure maximum possible width of text.
+        final float maxTextWidth = mNumberPaint.measureText(MAX_COUNT_STRING);
+        // Estimate maximum possible height of text.
+        final float maxTextHeight = -fontMetrics.top + fontMetrics.bottom;
+
+        // Add padding to maximum width calculation.
+        final int desiredWidth = Math.round(maxTextWidth + getPaddingLeft() + getPaddingRight());
+
+        // Add padding to maximum height calculation.
+        final int desiredHeight = Math.round(maxTextHeight * 2f + getPaddingTop() +
+                getPaddingBottom());
+
+        // Reconcile size that this view wants to be with the size the parent will let it be.
+        final int measuredWidth = reconcileSize(desiredWidth, widthMeasureSpec);
+        final int measuredHeight = reconcileSize(desiredHeight, heightMeasureSpec);
+
+        // Store the final measured dimensions.
+        setMeasuredDimension(measuredWidth, measuredHeight);
     }
 
     @Override
@@ -93,6 +113,35 @@ public class MyTallyCounter extends View implements TallyCounter{
         // Draw.
         canvas.drawText(displayedCount, textX, baselineY, mNumberPaint);
     }
+
+    /**
+     * Reconcile a desired size for the view contents with a {@link android.view.View.MeasureSpec}
+     * constraint passed by the parent.
+     *
+     * This is a simplified version of {@link View#resolveSize(int, int)}
+     *
+     * @param contentSize Size of the view's contents.
+     * @param measureSpec A {@link android.view.View.MeasureSpec} passed by the parent.
+     * @return A size that best fits {@code contentSize} while respecting the parent's constraints.
+     */
+    private int reconcileSize(int contentSize, int measureSpec) {
+        final int mode = MeasureSpec.getMode(measureSpec);
+        final int specSize = MeasureSpec.getSize(measureSpec);
+        switch (mode) {
+            case MeasureSpec.EXACTLY:
+                return specSize;
+            case MeasureSpec.AT_MOST:
+                if (contentSize < specSize) {
+                    return contentSize;
+                } else {
+                    return specSize;
+                }
+            case MeasureSpec.UNSPECIFIED:
+            default:
+                return contentSize;
+        }
+    }
+
 
     @Override
     public void reset() {

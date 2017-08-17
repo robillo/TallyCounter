@@ -15,9 +15,14 @@
         android:id="@+id/increment"/>
 
     <com.robillo.tallycounter.MyTallyCounter
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="20sp"
+        android:paddingStart="20sp"
+        android:paddingEnd="20sp"
+        android:paddingLeft="20sp"
+        android:paddingRight="20sp"
+        android:layout_gravity="center_horizontal"
         android:id="@+id/my_tally_counter"/>
 
     <Button
