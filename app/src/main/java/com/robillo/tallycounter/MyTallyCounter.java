@@ -62,6 +62,11 @@ public class MyTallyCounter extends View implements TallyCounter{
     }
 
     @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
+    @Override
     protected void onDraw(Canvas canvas) {
 
         // Grab canvas dimensions.

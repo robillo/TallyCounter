@@ -20,4 +20,11 @@
         android:layout_margin="10sp"
         android:id="@+id/my_tally_counter"/>
 
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="RESET"
+        android:background="?attr/selectableItemBackground"
+        android:id="@+id/reset" />
+
 </LinearLayout>
