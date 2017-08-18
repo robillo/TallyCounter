@@ -53,9 +53,57 @@ public class MyStopWatch extends View implements CounterInterface{
         //MEASUREMENTS
         //SET TEXTSIZE TO 64 SP
         mNumberPaint.setTextSize(Math.round(64f * getResources().getDisplayMetrics().scaledDensity));
+        mCornerRadius = Math.round(1f * getResources().getDisplayMetrics().density);
 
         //INITIAL SETUP HERE
         setCount(0);
+    }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        final Paint.FontMetrics fontMetrics = mNumberPaint.getFontMetrics();
+
+        //MEASURE MAX WIDTH, ESTIMATE MAX HEIGHT
+        final float maxWidth = mNumberPaint.measureText(MAX_COUNT_STRING);
+        final float maxHeight = -fontMetrics.top + fontMetrics.bottom;
+
+        //Add paddings to max width and height
+        final int desiredWidth = Math.round(maxWidth + getPaddingLeft() + getPaddingRight());
+        final int desiredHeight = Math.round(maxHeight + getPaddingTop() + getPaddingBottom());
+
+        final int measureWidth = reconcileSize(desiredWidth, widthMeasureSpec);
+        final int measureHeight = reconcileSize(desiredHeight, heightMeasureSpec);
+
+        //STORE THE FINAL MEASURED DIMENSIONS
+        setMeasuredDimension(measureWidth, measureHeight);
+    }
+
+    /**
+     * Reconcile a desired size for the view contents with a {@link android.view.View.MeasureSpec}
+     * constraint passed by the parent.
+     *
+     * This is a simplified version of {@link View#resolveSize(int, int)}
+     *
+     * @param contentSize Size of the view's contents.
+     * @param measureSpec A {@link android.view.View.MeasureSpec} passed by the parent.
+     * @return A size that best fits {@code contentSize} while respecting the parent's constraints.
+     */
+    private int reconcileSize(int contentSize, int measureSpec) {
+        final int mode = MeasureSpec.getMode(measureSpec);
+        final int specSize = MeasureSpec.getSize(measureSpec);
+        switch (mode) {
+            case MeasureSpec.EXACTLY:
+                return specSize;
+            case MeasureSpec.AT_MOST:
+                if (contentSize < specSize) {
+                    return contentSize;
+                } else {
+                    return specSize;
+                }
+            case MeasureSpec.UNSPECIFIED:
+            default:
+                return contentSize;
+        }
     }
 
     @Override
