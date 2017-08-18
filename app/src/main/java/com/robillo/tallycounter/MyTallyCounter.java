@@ -18,7 +18,7 @@ import java.util.Locale;
  * Created by robinkamboj on 17/08/17.
  */
 
-public class MyTallyCounter extends View implements TallyCounter{
+public class MyTallyCounter extends View implements CounterInterface {
 
     private static final int MAX_COUNT = 9999;
     private static final String MAX_COUNT_STRING = String.valueOf(MAX_COUNT);
@@ -146,7 +146,6 @@ public class MyTallyCounter extends View implements TallyCounter{
         }
     }
 
-
     @Override
     public void reset() {
         if(getCount()!=0){
@@ -174,7 +173,7 @@ public class MyTallyCounter extends View implements TallyCounter{
         invalidate();
     }
 
-    //UNUSED FOR THIS PROJECT
+    //UNUSED CONSTRUCTORS FOR THIS PROJECT
     public MyTallyCounter(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
