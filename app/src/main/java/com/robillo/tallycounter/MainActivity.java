@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MainActivity extends FragmentActivity {
 
     MyStopWatch counter;
@@ -19,7 +22,18 @@ public class MainActivity extends FragmentActivity {
         (findViewById(R.id.increment)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                counter.increment();
+                Timer timer = new Timer();
+                timer.scheduleAtFixedRate(new TimerTask() {
+                    @Override
+                    public void run() {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                counter.increment();
+                            }
+                        });
+                    }
+                }, 1000, 1000);
             }
         });
         (findViewById(R.id.reset)).setOnClickListener(new View.OnClickListener() {
