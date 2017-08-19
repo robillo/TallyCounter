@@ -1,6 +1,7 @@
 package com.robillo.tallycounter;
 
 import android.content.Context;
+import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.os.Build;
@@ -10,6 +11,8 @@ import android.support.v4.content.ContextCompat;
 import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.View;
+
+import java.util.Locale;
 
 /**
  * Created by robinkamboj on 19/08/17.
@@ -23,7 +26,7 @@ public class MyStopWatch extends View implements CounterInterface{
 
     //STATE VARIABLES
     private int count;
-    private int displayedCount;
+    private String displayedCount;
 
     //DRAWING VARIABLES
     Paint mBackgroundPaint, mLinePaint;
@@ -107,23 +110,59 @@ public class MyStopWatch extends View implements CounterInterface{
     }
 
     @Override
-    public void reset() {
+    protected void onDraw(Canvas canvas) {
 
+        //GRAB CANVAS DIMENSIONS
+        final int canvasWidth = canvas.getWidth();
+        final int canvasHeight = canvas.getHeight();
+
+        //CALCULATE HORIZONTAL CENTER
+        final float centerX = canvasWidth * 0.5f; //HALF OF WIDTH OF canvasWidth
+
+        //DRAW THE BACKGROUND
+        mBackgroundRect.set(0f, 0f, canvasWidth, canvasHeight);
+        canvas.drawRoundRect(mBackgroundRect, mCornerRadius, mCornerRadius, mBackgroundPaint);
+
+        //DRAW THE BASELINE
+        final float baselineY = canvasHeight * 0.65f;
+        final Paint.FontMetrics fontMetrics = mNumberPaint.getFontMetrics();
+        final int topY = Math.round(baselineY + fontMetrics.top);
+        final int bottomY = Math.round(baselineY + fontMetrics.bottom);
+        canvas.drawLine(0f, topY, canvasWidth, topY, mLinePaint);
+        canvas.drawLine(0f, bottomY, canvasWidth, bottomY, mLinePaint);
+
+        //Measure textwidth, text x-cood that will center the text, draw text
+        final float textWidth = mNumberPaint.measureText(displayedCount);
+        final float textX = Math.round(centerX - textWidth * 0.5f);
+        canvas.drawText(displayedCount, textX, baselineY, mNumberPaint);
+
+    }
+
+    @Override
+    public void reset() {
+        if(getCount()!=0){
+            setCount(0);
+            invalidate();
+        }
     }
 
     @Override
     public void increment() {
-
+        setCount(count+1);
     }
 
     @Override
     public int getCount() {
-        return 0;
+        return count;
     }
 
     @Override
     public void setCount(int count) {
-
+        count = Math.min(count, MAX_SECONDS);
+        this.count = count;
+        // Create the string here.
+        this.displayedCount = String.format(Locale.getDefault(), "%04d", count);
+        invalidate();
     }
 
     //UNUSED CONSTRUCTORS FOR THIS PROJECT
