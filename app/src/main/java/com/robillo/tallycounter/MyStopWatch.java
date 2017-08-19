@@ -46,7 +46,7 @@ public class MyStopWatch extends View implements CounterInterface{
         mBackgroundPaint.setColor(ContextCompat.getColor(context, R.color.colorPrimary));
         mLinePaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         mLinePaint.setColor(ContextCompat.getColor(context, R.color.colorAccent));
-        mLinePaint.setStrokeWidth(1f);
+        mLinePaint.setStrokeWidth(4f);
         mNumberPaint = new TextPaint(Paint.ANTI_ALIAS_FLAG);
         mNumberPaint.setColor(ContextCompat.getColor(context, R.color.colorAccent));
 
@@ -124,7 +124,7 @@ public class MyStopWatch extends View implements CounterInterface{
         canvas.drawRoundRect(mBackgroundRect, mCornerRadius, mCornerRadius, mBackgroundPaint);
 
         //DRAW THE BASELINE
-        final float baselineY = canvasHeight * 0.65f;
+        final float baselineY = canvasHeight * 0.7f;
         final Paint.FontMetrics fontMetrics = mNumberPaint.getFontMetrics();
         final int topY = Math.round(baselineY + fontMetrics.top);
         final int bottomY = Math.round(baselineY + fontMetrics.bottom);

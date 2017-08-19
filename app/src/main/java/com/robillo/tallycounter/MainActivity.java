@@ -8,7 +8,7 @@ import android.widget.Button;
 
 public class MainActivity extends FragmentActivity {
 
-    MyTallyCounter counter;
+    MyStopWatch counter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
