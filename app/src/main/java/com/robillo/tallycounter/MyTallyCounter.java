@@ -1,5 +1,6 @@
 package com.robillo.tallycounter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -13,6 +14,8 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by robinkamboj on 17/08/17.
