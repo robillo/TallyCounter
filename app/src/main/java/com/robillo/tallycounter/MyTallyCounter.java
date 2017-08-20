@@ -163,6 +163,11 @@ public class MyTallyCounter extends View implements CounterInterface {
     }
 
     @Override
+    public void increment(Activity activity) {
+
+    }
+
+    @Override
     public int getCount() {
         return count;
     }

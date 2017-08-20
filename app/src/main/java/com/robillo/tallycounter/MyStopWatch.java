@@ -1,5 +1,6 @@
 package com.robillo.tallycounter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -13,6 +14,8 @@ import android.util.AttributeSet;
 import android.view.View;
 
 import java.util.Locale;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by robinkamboj on 19/08/17.
@@ -149,6 +152,22 @@ public class MyStopWatch extends View implements CounterInterface{
     @Override
     public void increment() {
         setCount(count+1);
+    }
+
+    @Override
+    public void increment(Activity activity) {
+        final Timer timer = new Timer();
+        activity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                timer.scheduleAtFixedRate(new TimerTask() {
+                    @Override
+                    public void run() {
+                        setCount(count+1);
+                    }
+                }, 1000, 1000);
+            }
+        });
     }
 
     @Override

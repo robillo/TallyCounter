@@ -34,6 +34,7 @@ public class MainActivity extends FragmentActivity {
                         });
                     }
                 }, 1000, 1000);
+//                counter.increment(MainActivity.this);
             }
         });
         (findViewById(R.id.reset)).setOnClickListener(new View.OnClickListener() {
