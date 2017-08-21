@@ -27,7 +27,7 @@ public class MyTallyCounter extends View implements CounterInterface {
     private static final String MAX_COUNT_STRING = String.valueOf(MAX_COUNT);
 
     // State variables
-    private int count;
+    private int count = 100;
     private String displayedCount;
 
     //Drawing variables
@@ -62,7 +62,7 @@ public class MyTallyCounter extends View implements CounterInterface {
         mCornerRadius = Math.round(1f * getResources().getDisplayMetrics().density);
 
         // Do initial count setup.
-        setCount(0);
+        setCount(count);
     }
 
     @Override
@@ -165,6 +165,11 @@ public class MyTallyCounter extends View implements CounterInterface {
     @Override
     public void increment(Activity activity) {
 
+    }
+
+    @Override
+    public void decrement(){
+        setCount(count-1);
     }
 
     @Override

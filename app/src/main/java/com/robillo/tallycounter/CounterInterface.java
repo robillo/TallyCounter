@@ -13,4 +13,5 @@ public interface CounterInterface {
     void increment(Activity activity);
     int getCount();
     void setCount(int count);
+    void decrement();
 }

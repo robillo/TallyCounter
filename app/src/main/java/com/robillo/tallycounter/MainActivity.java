@@ -29,7 +29,7 @@ public class MainActivity extends FragmentActivity {
                         runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                counter.increment();
+                                counter.decrement();
                             }
                         });
                     }

@@ -171,6 +171,11 @@ public class MyStopWatch extends View implements CounterInterface{
     }
 
     @Override
+    public void decrement(){
+        setCount(count-1);
+    }
+
+    @Override
     public int getCount() {
         return count;
     }
