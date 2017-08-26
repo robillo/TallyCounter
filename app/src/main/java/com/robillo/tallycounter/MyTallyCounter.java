@@ -153,18 +153,14 @@ public class MyTallyCounter extends View implements CounterInterface {
     public void reset() {
         if(getCount()!=0){
             setCount(0);
-            invalidate();
+//            invalidate();
+            postInvalidate();
         }
     }
 
     @Override
     public void increment() {
         setCount(count+1);
-    }
-
-    @Override
-    public void increment(Activity activity) {
-
     }
 
     @Override

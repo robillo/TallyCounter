@@ -155,22 +155,6 @@ public class MyStopWatch extends View implements CounterInterface{
     }
 
     @Override
-    public void increment(Activity activity) {
-        final Timer timer = new Timer();
-        activity.runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                timer.scheduleAtFixedRate(new TimerTask() {
-                    @Override
-                    public void run() {
-                        setCount(count+1);
-                    }
-                }, 1000, 1000);
-            }
-        });
-    }
-
-    @Override
     public void decrement(){
         setCount(count-1);
     }
