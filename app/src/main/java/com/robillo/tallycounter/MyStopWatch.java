@@ -62,7 +62,7 @@ public class MyStopWatch extends View implements CounterInterface{
         mCornerRadius = Math.round(1f * getResources().getDisplayMetrics().density);
 
         //INITIAL SETUP HERE
-        setCount(0);
+        setCount(100);
     }
 
     @Override
@@ -186,7 +186,8 @@ public class MyStopWatch extends View implements CounterInterface{
         this.count = count;
         // Create the string here.
         this.displayedCount = String.format(Locale.getDefault(), "%04d", count);
-        invalidate();
+        //invalidate();
+        postInvalidate();
     }
 
     //UNUSED CONSTRUCTORS FOR THIS PROJECT
