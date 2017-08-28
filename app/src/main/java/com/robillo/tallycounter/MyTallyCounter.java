@@ -177,7 +177,7 @@ public class MyTallyCounter extends View implements CounterInterface {
     public void setCount(int count) {
         count = Math.min(count, MAX_COUNT);
         this.count = count;
-        // Create the string here.
+        //The string to be displayed is formatted here
         this.displayedCount = String.format(Locale.getDefault(), "%04d", count);
         invalidate();
     }
